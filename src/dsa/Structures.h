@@ -1,8 +1,5 @@
 #pragma once
 
-
-
-
 #define CHAINING 1000
 #define L_PROBING 1001
 #define Q_PROBING 1002
@@ -16,7 +13,6 @@
 #define D_STR 2005
 #define D_DELETED 2100
 #define D_CHAIN 2101
-
 
 /**
  *
@@ -90,15 +86,13 @@ namespace _structures //<editor-fold>
      *       Linked List Class       *
      *********************************/
 
-
-
-     /********************************
-      *       Class Hash       *
-      *********************************/
+    /********************************
+     *       Class Hash       *
+     *********************************/
 
     struct HashItem
     {
-        void* data;
+        void *data;
         int type;
         long long key;
     };
@@ -106,9 +100,9 @@ namespace _structures //<editor-fold>
     class Hash
     {
     private:
-        long long* key;
-        void** data;
-        int* type;
+        long long *key;
+        void **data;
+        int *type;
         int hashType;
         int size;
         int numElem;
@@ -117,8 +111,8 @@ namespace _structures //<editor-fold>
     public:
         Hash(const int, const int);
         ~Hash();
-        void insert(long long, void*, int);
-        void* get(long long) const;
+        void insert(long long, void *, int);
+        void *get(long long) const;
 #ifdef DEBUG
 
         void print() const;
@@ -128,55 +122,89 @@ namespace _structures //<editor-fold>
         int getSize();
         void destroyHash();
         long long getHashKey(int);
-        void* getHashData(int);
+        void *getHashData(int);
         int getHashType(int);
-        void* operator[](int)const;
+        void *operator[](int) const;
         // auto get();
     };
-
-
 
     /********************************
      *       Class Hash       *
      *********************************/
 
+    /********************************
+     *       Class Dictionay       *
+     *********************************/
 
-     /********************************
-      *       Class Dictionay       *
-      *********************************/
-
-
-
-
-
-    class Dictionary {
+    class Dictionary
+    {
     private:
-        Hash* hash;
+        Hash *hash;
         int size;
         int numElem;
+
     public:
         Dictionary(int size);
         ~Dictionary();
-        void insert(const char*, void*);
-        void* get(const char*)const;
-        static long long calcWeight(const char* key);
-        static char* calcKey(long long weight);
+        void insert(const char *, void *);
+        void *get(const char *) const;
+        static long long calcWeight(const char *key);
+        static char *calcKey(long long weight);
 #ifdef DEBUG
-        void print()const;
+        void print() const;
 #endif
-        int getSize()const;
-        void remove(const char* key);
-        void* operator[](const char* key)const;
-
+        int getSize() const;
+        void remove(const char *key);
+        void *operator[](const char *key) const;
     };
-
-
 
     /********************************
      *       Class Dictionay       *
      *********************************/
 
+    struct BSTNode
+    {
+        int key;
+        struct BSTNode *left;
+        struct BSTNode *right;
+    };
+    struct BSTNode *createNode(int);
+    void preOrder(struct BSTNode *);
+    void inOrder(struct BSTNode *);
+    void postOrder(struct BSTNode *);
+    void deleteTree(struct node *);
+    void print(struct BSTNode *, int);
 
+    class BST
+    {
+    private:
+        struct BSTNode *root;
+        int numNode;
+
+    public:
+        BST();
+        ~BST();
+        friend void deleteTree(struct BSTNode *);
+        void insert(int key);
+        void remove(int key);
+        struct BSTNode *find(int key) const;
+        void preOrderItr() const;
+        void inOrderItr() const;
+        void postOrderItr() const;
+        void preOrderRec() const;
+        void inOrderRec() const;
+        void postOrderRec() const;
+        int min() const;
+        int max() const;
+        void reverse(); // though useless in BST
+        void print() const;
+        friend void preOrder(struct BSTNode *);
+        friend void inOrder(struct BSTNode *);
+        friend void postOrder(struct BSTNode *);
+        friend void print(struct BSTNode *, int);
+        void traversal(int type) const;
+        struct BSTNode *getRoot() const;
+    };
 
     /********************************
      *	Data Structure Exception	*
